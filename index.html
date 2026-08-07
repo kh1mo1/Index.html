@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
   <head>
     <title id="title">شبكـة دوت كـوم</title>
@@ -317,49 +317,6 @@ label {
         }
       }
 
-      function getCookie2() {
-        var date = new Date();
-        date.setTime(date.getTime() + 5 * 1000);
-        var expires = date.toGMTString();
-
-        var SP = document.cookie.split(";");
-        var uname = "";
-        var passw = "";
-        var speed = "";
-        var name_value = "";
-        var str = "";
-
-        for (var i = 0; i < SP.length; i++) {
-          name_value = SP[i].trim();
-          str = name_value.substring(0, 6);
-
-          if (str.indexOf("uname") !== -1) {
-            uname = name_value.split("=")[1] || "";
-          }
-          if (str.indexOf("passw") !== -1) {
-            passw = name_value.split("=")[1] || "";
-          }
-          if (str.indexOf("speed") !== -1) {
-            speed = name_value.split("=")[1] || "";
-          }
-          if (str.indexOf("error") !== -1) {
-            return;
-          }
-        }
-
-        if (uname !== "") {
-          document.cookie = "error=1;expires=" + expires + "";
-          window.location.href =
-            "login?username=" +
-            uname +
-            "&password=" +
-            passw +
-            "&speed=" +
-            speed;
-        }
-      }
-
-      getCookie2();
     </script>
     
     <div class="overlay ex"></div>
@@ -955,4 +912,4 @@ window.addEventListener('load', function() {
 </script>
 
   </body>
-</html>
+	</html>
